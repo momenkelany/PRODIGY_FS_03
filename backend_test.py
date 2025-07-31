@@ -195,6 +195,95 @@ class SupermarketAPITester:
         )
         return success
 
+    def test_wishlist_functionality(self):
+        """Test wishlist creation and operations"""
+        print("\n💝 Testing Wishlist Functionality...")
+        
+        # Create wishlist
+        success, response = self.run_test(
+            "Create Wishlist",
+            "POST",
+            "api/wishlist",
+            200
+        )
+        if not success or 'wishlist_id' not in response:
+            return False
+            
+        wishlist_id = response['wishlist_id']
+        print(f"   Wishlist ID: {wishlist_id}")
+        
+        # Get empty wishlist
+        success, response = self.run_test(
+            "Get Empty Wishlist",
+            "GET",
+            f"api/wishlist/{wishlist_id}",
+            200
+        )
+        if not success:
+            return False
+            
+        # Add item to wishlist
+        if self.product_ids:
+            success, response = self.run_test(
+                "Add to Wishlist",
+                "POST",
+                f"api/wishlist/{wishlist_id}/items",
+                200,
+                data={"product_id": self.product_ids[0]}
+            )
+            if not success:
+                return False
+                
+            # Get wishlist with items
+            success, response = self.run_test(
+                "Get Wishlist with Items",
+                "GET",
+                f"api/wishlist/{wishlist_id}",
+                200
+            )
+            if success and response:
+                items_count = len(response.get('items', []))
+                print(f"   Wishlist has {items_count} items")
+                
+            # Toggle item (remove from wishlist)
+            success, response = self.run_test(
+                "Toggle Wishlist Item (Remove)",
+                "POST",
+                f"api/wishlist/{wishlist_id}/items",
+                200,
+                data={"product_id": self.product_ids[0]}
+            )
+            
+        return True
+
+    def test_search_and_filter(self):
+        """Test search and category filtering"""
+        print("\n🔍 Testing Search and Filter...")
+        
+        # Test search
+        success, response = self.run_test(
+            "Search Products (apple)",
+            "GET",
+            "api/products",
+            200,
+            params={"search": "apple"}
+        )
+        if success and response:
+            print(f"   Found {len(response)} products matching 'apple'")
+            
+        # Test category filter
+        success, response = self.run_test(
+            "Filter by Category (Fresh Produce)",
+            "GET",
+            "api/products",
+            200,
+            params={"category": "Fresh Produce"}
+        )
+        if success and response:
+            print(f"   Found {len(response)} products in 'Fresh Produce' category")
+            
+        return True
+
 def main():
     print("🛒 Starting Supermarket Cart API Tests")
     print("=" * 50)
