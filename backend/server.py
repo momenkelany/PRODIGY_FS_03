@@ -374,9 +374,13 @@ async def add_to_cart(cart_id: str, item: CartItem):
     
     return {"message": "Item added to cart successfully"}
 
+class UpdateQuantity(BaseModel):
+    quantity: int
+
 @app.put("/api/cart/{cart_id}/items/{product_id}")
-async def update_cart_item(cart_id: str, product_id: str, quantity: int):
+async def update_cart_item(cart_id: str, product_id: str, update_data: UpdateQuantity):
     """Update item quantity in cart"""
+    quantity = update_data.quantity
     if quantity <= 0:
         # Remove item if quantity is 0 or negative
         carts_collection.update_one(
