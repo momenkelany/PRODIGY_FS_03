@@ -331,6 +331,12 @@ def main():
     print("\n❌ Testing Error Cases...")
     tester.test_cart_not_found()
     
+    # Test wishlist functionality
+    tester.test_wishlist_functionality()
+    
+    # Test search and filtering
+    tester.test_search_and_filter()
+    
     # Print final results
     print("\n" + "=" * 50)
     print(f"📊 Final Results: {tester.tests_passed}/{tester.tests_run} tests passed")
