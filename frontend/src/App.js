@@ -340,7 +340,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-4">
             <Filter className="h-5 w-5 text-gray-400" />
-            <Select value={selectedCategory || undefined} onValueChange={setSelectedCategory}>
+            <Select value={selectedCategory || 'all'} onValueChange={handleCategoryChange}>
               <SelectTrigger className="w-48">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
