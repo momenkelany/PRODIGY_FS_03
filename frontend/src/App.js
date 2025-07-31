@@ -20,6 +20,8 @@ function App() {
   const [cartId, setCartId] = useState(null);
   const [wishlistId, setWishlistId] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const handleCategoryChange = (value) => {
     if (value === 'all') {
       setSelectedCategory('');
