@@ -1,6 +1,6 @@
 # E-commerce Store
 
-![Live Preview](Local Store E-commerce Platform.png)
+![Live Preview](Local-Store-E-commerce-Platform.png)
 
 
 This project is a fully functional e-commerce store application built with React and JavaScript. It features product listings, a shopping cart, and a wishlist, providing a comprehensive example of a modern web application.
