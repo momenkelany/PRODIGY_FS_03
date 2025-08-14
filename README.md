@@ -122,8 +122,5 @@ Distributed under the MIT License. See `LICENSE` for more information. (Note: A 
 ---
 
 🎓 Internship Program Prodigy InfoTech  
-📅 Task 03 – Local Store E-commerce Platform
+📅 Task 03 – Local Store E-commerce Platform  
 🚀 Intern Momen Kelany
-
-
-
